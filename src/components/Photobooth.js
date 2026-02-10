@@ -98,10 +98,12 @@ export default function PhotoBooth() {
         });
     };
 
-    useEffect(drawCanvas, [photos, stickers, selectedSticker, photoCount]);
+    useEffect(() => {
+        drawCanvas();
+    }, [drawCanvas, photos, stickers, selectedSticker, photoCount]);
 
     const handleBack = () => {
-        if (mode == "decorate") {
+        if (mode === "decorate") {
             setMode("photo");
             setCanTakePhoto(false);
             setStickers([]);
@@ -257,7 +259,7 @@ export default function PhotoBooth() {
             });
         }
 
-        if (draggingSticker != null && mode === "decorate") {
+        if (draggingSticker !== null && mode === "decorate") {
             setStickers(s => {
                 const u = [...s];
                 u[draggingSticker] = {
@@ -288,10 +290,10 @@ export default function PhotoBooth() {
         const handleKeyDown = e => {
             if (
                 (e.key === "Delete" || e.key === "Backspace") &&
-                selectedSticker != null &&
+                selectedSticker !== null &&
                 mode === "decorate"
             ){
-                setStickers(s => s.filter((_,i) => i != selectedSticker));
+                setStickers(s => s.filter((_,i) => i !== selectedSticker));
                 setSelectedSticker(null);
             }
         };
@@ -390,7 +392,7 @@ export default function PhotoBooth() {
 
                                         {/* Overlay countdown */}
 
-                                        {countdown != null && (
+                                        {countdown !== null && (
                                             <div style = {{
                                                 position: "absolute",
                                                 inset: 0,
